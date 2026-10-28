@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-persona="doctor" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>د. طارق المنصوري | استشاري جراحة القلب والقسطرة - النسخة التجريبية</title>
+
+    <!-- SEO & Open Graph Tags -->
+    <meta name="description" content="الصفحة الرسمية والروابط المباشرة لحجز المواعيد والاستشارات. تصميم احترافي مخصص للأطباء والمهندسين.">
+    <meta name="theme-color" content="#070b14">
+
+    <!-- Preconnect to External Domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+
+    <!-- Google Fonts: Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================= THEME & PERSONA VARIABLES ================= */
+        :root {
+            /* Default: Doctor Persona (Medical Cyan & Emerald) + Dark Mode */
+            --bg-color: #070b14;
+            --bg-secondary: #0f172a;
+            --primary: #0ea5e9;
+            --primary-rgb: 14, 165, 233;
+            --primary-glow: rgba(14, 165, 233, 0.45);
+            --accent: #10b981;
+            --accent-rgb: 16, 185, 129;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --card-bg: rgba(15, 23, 42, 0.78);
+            --card-hover: rgba(30, 41, 59, 0.92);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --demo-bar-bg: rgba(15, 23, 42, 0.9);
+            --shadow-main: 0 10px 30px -5px rgba(0, 0, 0, 0.5);
+            --transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Engineer Persona Overrides (Architectural Gold & Royal Blue) */
+        html[data-persona="engineer"] {
+            --primary: #f59e0b;
+            --primary-rgb: 245, 158, 11;
+            --primary-glow: rgba(245, 158, 11, 0.45);
+            --accent: #3b82f6;
+            --accent-rgb: 59, 130, 246;
+        }
+
+        /* Light Mode Overrides (High-Trust Clean Clinic / Corporate Look) */
+        html[data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --bg-secondary: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --card-bg: rgba(255, 255, 255, 0.88);
+            --card-hover: rgba(255, 255, 255, 1);
+            --glass-border: rgba(15, 23, 42, 0.08);
+            --demo-bar-bg: rgba(255, 255, 255, 0.92);
+            --shadow-main: 0 12px 28px -6px rgba(15, 23, 42, 0.08);
+        }
+
+        html[data-theme="light"][data-persona="doctor"] {
+            --primary: #0284c7;
+            --primary-rgb: 2, 132, 199;
+            --primary-glow: rgba(2, 132, 199, 0.28);
+        }
+
+        html[data-theme="light"][data-persona="engineer"] {
+            --primary: #d97706;
+            --primary-rgb: 217, 119, 6;
+            --primary-glow: rgba(217, 119, 6, 0.28);
+        }
+
+        /* ================= RESET & GLOBAL ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
+            color: var(--text-main);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 0%, rgba(var(--primary-rgb), 0.16), transparent 55%),
+                radial-gradient(circle at 85% 80%, rgba(var(--accent-rgb), 0.1), transparent 45%);
+            position: relative;
+            transition: background-color 0.4s ease, color 0.4s ease;
+            padding-top: 68px; /* Space for Fiverr Demo Switcher */
+        }
+
+        /* Subtle Architectural/Medical Grid Overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(var(--primary-rgb), 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(var(--primary-rgb), 0.03) 1px, transparent 1px);
+            background-size: 36px 36px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            padding: 1.5rem 1.4rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+            z-index: 1;
+            perspective: 1000px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            outline: none;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        /* ================= FIVERR DEMO SWITCHER BAR ================= */
+        .demo-switcher-bar {
+            position: fixed;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: var(--demo-bar-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(var(--primary-rgb), 0.35);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), 0 0 15px rgba(var(--primary-rgb), 0.15);
+            padding: 6px 10px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 95vw;
+            white-space: nowrap;
+        }
+
+        .demo-badge {
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(var(--primary-rgb), 0.15);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .persona-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .persona-btn.active {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 14px var(--primary-glow);
+        }
+
+        .persona-btn:hover:not(.active) {
+            color: var(--text-main);
+            background: rgba(var(--primary-rgb), 0.1);
+        }
+
+        .theme-toggle-btn {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            background: rgba(var(--primary-rgb), 0.1);
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: rotate(20deg) scale(1.1);
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* ================= ANIMATIONS ================= */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateZ(0); }
+            50% { transform: translateY(-7px) translateZ(0); }
+        }
+
+        @keyframes float-action {
+            0%, 100% { translate: 0 0px; }
+            50% { translate: 0 -4px; }
+        }
+
+        @keyframes spin-gradient {
+            0% { transform: rotate(0deg) translateZ(0); }
+            100% { transform: rotate(360deg) translateZ(0); }
+        }
+
+        @keyframes btn-pulse {
+            0%, 100% { transform: scale(1) translateZ(0); }
+            50% { transform: scale(1.02) translateZ(0); }
+        }
+
+        @keyframes border-pulse {
+            0%, 100% { border-color: rgba(var(--platform-color-rgb), 0.38); }
+            50% { border-color: rgba(var(--platform-color-rgb), 0.85); }
+        }
+
+        @keyframes shine-sweep {
+            0% { transform: translateX(-250%) skewX(-25deg); }
+            25%, 100% { transform: translateX(350%) skewX(-25deg); }
+        }
+
+        @keyframes icon-wiggle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.08) rotate(-4deg); }
+            75% { transform: scale(1.08) rotate(4deg); }
+        }
+
+        @keyframes arrow-bounce {
+            0%, 100% { transform: translateX(0); opacity: 0.7; }
+            50% { transform: translateX(-5px); opacity: 1; }
+        }
+
+        @keyframes status-ping {
+            0% { transform: scale(1); opacity: 0.9; }
+            75%, 100% { transform: scale(2.2); opacity: 0; }
+        }
+
+        .reveal-item {
+            opacity: 0;
+            transform: translateY(25px) scale(0.97);
+            transition: opacity 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .reveal-item.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            text-align: center;
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 2.2rem 1.5rem 1.8rem;
+            box-shadow: var(--shadow-main);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        .hero-top-actions {
+            position: absolute;
+            top: 1.2rem;
+            left: 1.2rem;
+            right: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .action-circle-btn {
+            pointer-events: auto;
+            background: rgba(var(--primary-rgb), 0.1);
+            border: 1px solid rgba(var(--primary-rgb), 0.25);
+            color: var(--text-main);
+            height: 42px;
+            padding: 0 14px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
+        }
+
+        .action-circle-btn.icon-only {
+            width: 42px;
+            padding: 0;
+            border-radius: 50%;
+        }
+
+        .action-circle-btn:hover {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 0 18px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        .profile-pic-container {
+            width: 132px;
+            height: 132px;
+            margin: 0.5rem auto 1rem;
+            border-radius: 50%;
+            padding: 4px;
+            position: relative;
+            animation: float 4.5s ease-in-out infinite;
+            box-shadow: 0 0 25px var(--primary-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translateZ(0);
+        }
+
+        .profile-pic-container::before {
+            content: '';
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--primary), var(--accent), #ffffff, var(--accent), var(--primary));
+            animation: spin-gradient 4s linear infinite;
+            z-index: -1;
+        }
+
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--bg-secondary);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background-color: var(--bg-secondary);
+        }
+
+        .profile-pic-container:hover .profile-pic {
+            transform: scale(1.06);
+        }
+
+        /* Status Available Pill */
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 14px;
+            border-radius: 30px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #10b981;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 0.7rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            position: relative;
+        }
+
+        .status-dot::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: #10b981;
+            animation: status-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        .name-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .brand-name {
+            font-size: 1.85rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.3px;
+        }
+
+        .verified-badge {
+            color: var(--primary);
+            font-size: 1.25rem;
+            filter: drop-shadow(0 0 6px var(--primary-glow));
+        }
+
+        .specialty-title {
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .bio {
+            color: var(--text-muted);
+            font-size: 0.94rem;
+            max-width: 520px;
+            margin: 0 auto 1.3rem;
+        }
+
+        /* Quick Stats Bar */
+        .stats-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.6rem;
+            background: rgba(var(--primary-rgb), 0.06);
+            border: 1px solid rgba(var(--primary-rgb), 0.18);
+            border-radius: 18px;
+            padding: 0.85rem 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-left: 1px solid var(--glass-border);
+        }
+
+        .stat-item:last-child {
+            border-left: none;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.76rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Hero CTA Buttons */
+        .hero-ctas {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            padding: 0.9rem 1.8rem;
+            border-radius: 16px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 420px;
+            justify-content: center;
+            transform: translateZ(0);
+        }
+
+        .btn-primary::after,
+        .btn-secondary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.35), transparent);
+            transform: translateX(-250%) skewX(-25deg);
+            animation: shine-sweep 4.5s infinite;
+            pointer-events: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: #ffffff;
+            box-shadow: 0 8px 25px var(--primary-glow);
+            animation: btn-pulse 2.5s infinite ease-in-out;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 14px 30px var(--primary-glow);
+            animation: none;
+        }
+
+        .btn-secondary {
+            background: rgba(var(--primary-rgb), 0.08);
+            color: var(--text-main);
+            border: 1.5px solid rgba(var(--primary-rgb), 0.35);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(var(--primary-rgb), 0.16);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* ================= SOCIAL & ACTION LINKS ================= */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.9rem;
+            padding: 0 0.3rem;
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            color: var(--text-main);
+        }
+
+        .section-title i {
+            color: var(--primary);
+        }
+
+        .links-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.95rem;
+        }
+
+        .link-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 18px;
+            padding: 1rem 1.35rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            border: 1.5px solid rgba(var(--platform-color-rgb), 0.45);
+            box-shadow: var(--shadow-main), inset 0 0 12px rgba(var(--platform-color-rgb), 0.08);
+            transform-style: preserve-3d;
+            transform: translateZ(0);
+            animation: border-pulse 3s infinite ease-in-out, float-action 4.5s infinite ease-in-out;
+            cursor: pointer;
+        }
+
+        .link-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 45%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(var(--platform-color-rgb), 0.15), transparent);
+            transform: translateX(-250%) skewX(-25deg);
+            animation: shine-sweep 6s infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .link-card:nth-child(1) { animation-delay: 0s, 0s; }
+        .link-card:nth-child(2) { animation-delay: 0.3s, 0.5s; }
+        .link-card:nth-child(3) { animation-delay: 0.6s, 1s; }
+        .link-card:nth-child(4) { animation-delay: 0.9s, 1.5s; }
+        .link-card:nth-child(5) { animation-delay: 1.2s, 2s; }
+        .link-card:nth-child(6) { animation-delay: 1.5s, 2.5s; }
+
+        .link-card::before,
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: var(--mouse-y, 50%);
+            left: var(--mouse-x, 50%);
+            transform: translate(-50%, -50%);
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(var(--platform-color-rgb), 0.28) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .link-card:hover::before,
+        .feature-card:hover::before,
+        .link-card.touch-active::before,
+        .feature-card.touch-active::before {
+            opacity: 1;
+        }
+
+        .link-card:hover,
+        .link-card:focus,
+        .link-card.touch-active {
+            background: var(--card-hover);
+            box-shadow: 0 14px 32px rgba(var(--platform-color-rgb), 0.35),
+                        inset 0 0 18px rgba(var(--platform-color-rgb), 0.2) !important;
+            border-color: rgba(var(--platform-color-rgb), 1) !important;
+            translate: 0 -5px !important;
+            z-index: 10;
+            animation-play-state: paused;
+        }
+
+        .link-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 2;
+        }
+
+        .link-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: rgba(var(--platform-color-rgb), 0.14);
+            color: rgb(var(--platform-color-rgb));
+            box-shadow: 0 0 12px rgba(var(--platform-color-rgb), 0.2);
+            transition: var(--transition);
+            animation: icon-wiggle 4s infinite ease-in-out;
+            flex-shrink: 0;
+        }
+
+        .link-card:hover .link-icon,
+        .link-card.touch-active .link-icon {
+            background: rgb(var(--platform-color-rgb));
+            color: white;
+            box-shadow: 0 0 20px rgb(var(--platform-color-rgb));
+            transform: scale(1.12) rotate(-6deg);
+            animation-play-state: paused;
+        }
+
+        .link-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-title {
+            font-weight: 800;
+            font-size: 1.06rem;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .link-card:hover .link-title {
+            color: rgb(var(--platform-color-rgb));
+            transform: translateX(-3px);
+        }
+
+        .link-subtitle {
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .link-badge-end {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 2;
+        }
+
+        .tag-pill {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 9px;
+            border-radius: 20px;
+            background: rgba(var(--platform-color-rgb), 0.14);
+            color: rgb(var(--platform-color-rgb));
+        }
+
+        .link-arrow {
+            color: rgb(var(--platform-color-rgb));
+            font-size: 1.05rem;
+            transition: var(--transition);
+            animation: arrow-bounce 2s infinite ease-in-out;
+        }
+
+        .link-card:hover .link-arrow {
+            transform: translateX(-8px) scale(1.2);
+            animation-play-state: paused;
+        }
+
+        /* ================= FEATURED SERVICES / PROJECTS GRID ================= */
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.95rem;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            padding: 1.4rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 0.45rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            --platform-color-rgb: var(--primary-rgb);
+            border: 1.5px solid rgba(var(--primary-rgb), 0.4);
+            box-shadow: var(--shadow-main);
+            transform: translateZ(0);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            background: var(--card-hover);
+            border-color: var(--primary);
+            box-shadow: 0 12px 28px var(--primary-glow);
+            translate: 0 -6px;
+        }
+
+        .feature-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: rgba(var(--primary-rgb), 0.12);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.55rem;
+            margin-bottom: 0.3rem;
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .feature-card:hover .feature-icon {
+            background: var(--primary);
+            color: #fff;
+            transform: scale(1.15) translateY(-3px);
+            box-shadow: 0 8px 20px var(--primary-glow);
+        }
+
+        .feature-title {
+            font-weight: 800;
+            font-size: 0.98rem;
+            color: var(--text-main);
+            z-index: 2;
+        }
+
+        .feature-desc {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            z-index: 2;
+        }
+
+        /* ================= LOCATION & WORKING HOURS CARD ================= */
+        .info-panel {
+            background: var(--card-bg);
+            border: 1.5px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.3rem 1.4rem;
+            box-shadow: var(--shadow-main);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9rem;
+        }
+
+        .info-row-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(var(--primary-rgb), 0.12);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            flex-shrink: 0;
+        }
+
+        .info-row-details h4 {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 2px;
+        }
+
+        .info-row-details p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* ================= BOOKING MODAL ================= */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: var(--bg-secondary);
+            border: 1.5px solid rgba(var(--primary-rgb), 0.45);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 460px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            transform: translateY(25px) scale(0.95);
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.2rem;
+            left: 1.2rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--glass-border);
+            background: rgba(var(--primary-rgb), 0.1);
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            text-align: right;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--text-main);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--glass-border);
+            background: var(--bg-color);
+            color: var(--text-main);
+            font-family: inherit;
+            font-size: 0.92rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+        }
+
+        /* Toast Notification */
+        .toast-msg {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 25px var(--primary-glow);
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            pointer-events: none;
+        }
+
+        .toast-msg.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            text-align: center;
+            margin-top: 1rem;
+            padding-bottom: 1.5rem;
+        }
+
+        .footer-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.1rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .footer-socials a {
+            color: var(--text-muted);
+            font-size: 1.25rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .footer-socials a:hover {
+            color: #fff;
+            background: var(--primary);
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 6px 16px var(--primary-glow);
+        }
+
+        .footer-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .developer-name {
+            color: var(--primary);
+            font-weight: 800;
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .developer-name:hover {
+            transform: scale(1.06);
+            text-decoration: underline;
+        }
+
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-anim 0.65s cubic-bezier(0.25, 0.8, 0.25, 1);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0%, rgba(var(--primary-rgb), 0.25) 100%);
+            pointer-events: none;
+            z-index: 20;
+        }
+
+        @keyframes ripple-anim {
+            to {
+                transform: scale(4.5);
+                opacity: 0;
+            }
+        }
+
+        /* ================= RESPONSIVE OPTIMIZATIONS ================= */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem 1rem 2rem;
+                gap: 1.4rem;
+            }
+
+            .demo-badge {
+                display: none;
+            }
+
+            .brand-name {
+                font-size: 1.55rem;
+            }
+
+            .featured-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .feature-card {
+                flex-direction: row;
+                justify-content: flex-start;
+                text-align: right;
+                padding: 1rem 1.2rem;
+                gap: 1rem;
+            }
+
+            .feature-icon {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .feature-info-wrap {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- خلفية الجزيئات التفاعلية -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- شريط التحكم في الديمو (للعرض على Fiverr) -->
+    <nav class="demo-switcher-bar" aria-label="شريط تبديل النسخة التجريبية">
+        <span class="demo-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Fiverr Demo</span>
+        <button class="persona-btn active" id="btnDoctor" onclick="switchPersona('doctor')">
+            <i class="fa-solid fa-user-doctor"></i> نسخة طبيب
+        </button>
+        <button class="persona-btn" id="btnEngineer" onclick="switchPersona('engineer')">
+            <i class="fa-solid fa-helmet-safety"></i> نسخة مهندس
+        </button>
+        <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="تبديل الوضع الليلي / النهاري" aria-label="تبديل المظهر">
+            <i class="fa-solid fa-sun" id="themeIcon"></i>
+        </button>
+    </nav>
+
+    <main class="container">
+
+        <!-- ================= HERO SECTION ================= -->
+        <header class="hero">
+            <div class="hero-top-actions">
+                <button class="action-circle-btn icon-only" id="shareBtn" aria-label="مشاركة الصفحة" title="مشاركة الرابط">
+                    <i class="fa-solid fa-share-nodes"></i>
+                </button>
+                <button class="action-circle-btn" id="vcardBtn" onclick="downloadVCard()" title="حفظ جهة الاتصال على الهاتف">
+                    <i class="fa-solid fa-address-card"></i> <span id="vcardText">حفظ بيانات الطبيب</span>
+                </button>
+            </div>
+
+            <div class="profile-pic-container">
+                <img id="profileImage" 
+                     src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80" 
+                     alt="الصورة الشخصية" 
+                     width="132" height="132" 
+                     class="profile-pic">
+            </div>
+
+            <div class="status-pill">
+                <span class="status-dot"></span>
+                <span id="statusText">متاح لحجز الاستشارات اليوم بالعيادة</span>
+            </div>
+
+            <div class="name-wrapper">
+                <h1 class="brand-name" id="profileName">د. طارق المنصوري</h1>
+                <i class="fa-solid fa-circle-check verified-badge" title="حساب موثق" aria-hidden="true"></i>
+            </div>
+
+            <p class="specialty-title" id="profileSpecialty">استشاري جراحة القلب والقسطرة التداخلية</p>
+
+            <p class="bio" id="profileBio">
+                زميل الكلية الملكية للجراحين بلندن • رعاية طبية متكاملة بأحدث تقنيات القسطرة العلاجية والتشخيص المبكر لأمراض القلب والشرايين.
+            </p>
+
+            <!-- شريط الإحصائيات السريعة -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-value" id="stat1Val">+15</span>
+                    <span class="stat-label" id="stat1Lbl">سنة خبرة</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="stat2Val">+4,800</span>
+                    <span class="stat-label" id="stat2Lbl">عملية وقسطرة ناجحة</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value" id="stat3Val">4.9 ⭐</span>
+                    <span class="stat-label" id="stat3Lbl">تقييم المرضى</span>
+                </div>
+            </div>
+
+            <!-- أزرار الإجراء الرئيسية -->
+            <div class="hero-ctas">
+                <button onclick="openBookingModal()" class="btn-primary ripple-btn">
+                    <span id="ctaPrimaryText">احجز موعدك الآن بالعيادة</span>
+                    <i class="fa-solid fa-calendar-check" id="ctaPrimaryIcon"></i>
+                </button>
+                <a href="#links-area" class="btn-secondary ripple-btn" onclick="openBookingModal('online')">
+                    <span id="ctaSecondaryText">طلب استشارة طبية أونلاين (فيديو)</span>
+                    <i class="fa-solid fa-video" id="ctaSecondaryIcon"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- ================= DIRECT LINKS SECTION ================= -->
+        <section id="links-area" aria-label="الروابط المباشرة">
+            <div class="section-header">
+                <h2 class="section-title"><i class="fa-solid fa-link"></i> <span id="linksSectionTitle">قنوات الحجز والتواصل المباشر</span></h2>
+            </div>
+
+            <div class="links-section" id="dynamicLinksContainer">
+                <!-- يتم تعبئة الروابط ديناميكياً عبر الجافاسكريبت مع الحفاظ على جميع التأثيرات -->
+            </div>
+        </section>
+
+        <!-- ================= FEATURED SERVICES / PROJECTS ================= -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title reveal-item"><i class="fa-solid fa-star"></i> <span id="featuresSectionTitle">التخصصات والخدمات الطبية</span></h2>
+            </div>
+
+            <div class="featured-grid" id="dynamicFeaturesContainer">
+                <!-- يتم تعبئة البطاقات ديناميكياً -->
+            </div>
+        </section>
+
+        <!-- ================= CLINIC / OFFICE LOCATION & HOURS ================= -->
+        <section class="info-panel reveal-item">
+            <div class="info-row">
+                <div class="info-row-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div class="info-row-details">
+                    <h4 id="locationTitle">عنوان العيادة الرئيسية</h4>
+                    <p id="locationAddress">القاهرة - التجمع الخامس - شارع التسعين الشمالي - ميديكال بارك بريمير - الدور الثالث (عيادة 304)</p>
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-row-icon"><i class="fa-solid fa-clock"></i></div>
+                <div class="info-row-details">
+                    <h4 id="hoursTitle">مواعيد العمل الرسمية</h4>
+                    <p id="hoursDesc">السبت إلى الخميس: 4:00 مساءً حتى 10:00 مساءً (الحجز مسبقاً)</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= FOOTER ================= -->
+        <footer class="reveal-item">
+            <div class="footer-socials">
+                <a href="#linkedin" onclick="showToast('معاينة الرابط الرسمي على LinkedIn')" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#whatsapp" onclick="openBookingModal()" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="#instagram" onclick="showToast('معاينة الحساب الرسمي على Instagram')" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="mailto:info@example.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+
+            <p class="footer-text" dir="ltr">
+                PREMIUM PORTFOLIO DEMO | DESIGNED BY 
+                <a href="https://www.facebook.com/share/1AGQipuHAd/" target="_blank" rel="noopener noreferrer" class="developer-name">SX CODE</a>
+            </p>
+            <p class="footer-text" style="margin-top: 4px;" id="footerCopyright">© 2026 جميع الحقوق محفوظة | نسخة عرض Fiverr</p>
+        </footer>
+
+    </main>
+
+    <!-- ================= INTERACTIVE BOOKING / QUOTE MODAL ================= -->
+    <div class="modal-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeBookingModal()" aria-label="إغلاق">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <h3 id="modalTitle" style="font-size: 1.3rem; font-weight: 800; margin-bottom: 0.3rem; color: var(--primary);">
+                حجز موعد سريع بالعيادة
+            </h3>
+            <p id="modalSubtitle" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.2rem;">
+                أدخل بياناتك وسيتم توجيهك فوراً لتأكيد الموعد عبر واتساب العيادة
+            </p>
+
+            <form id="quickForm" onsubmit="submitQuickForm(event)">
+                <div class="form-group">
+                    <label for="clientName" id="labelName">الاسم بالكامل</label>
+                    <input type="text" id="clientName" class="form-control" placeholder="اكتب اسمك الثلاثي..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="serviceType" id="labelService">نوع الكشف / الخدمة المطلوبة</label>
+                    <select id="serviceType" class="form-control"></select>
+                </div>
+
+                <div class="form-group">
+                    <label for="preferredDate" id="labelDate">اليوم المفضل</label>
+                    <input type="text" id="preferredDate" class="form-control" placeholder="مثال: غداً المساء / السبت القادم" required>
+                </div>
+
+                <button type="submit" class="btn-primary ripple-btn" style="max-width: 100%; margin-top: 0.5rem;">
+                    <span>إرسال الطلب عبر واتساب</span>
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- إشعار منبثق أنيق بديل عن alert -->
+    <div class="toast-msg" id="toastMsg">تم نسخ الرابط بنجاح!</div>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        /* بيانات النسختين (طبيب & مهندس) للعرض الفوري على فايفر */
+        const personasData = {
+            doctor: {
+                pageTitle: "د. طارق المنصوري | استشاري جراحة القلب والقسطرة - النسخة التجريبية",
+                vcardText: "حفظ بيانات الطبيب",
+                avatar: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=400&q=80",
+                status: "متاح لحجز الاستشارات اليوم بالعيادة",
+                name: "د. طارق المنصوري",
+                specialty: "استشاري جراحة القلب والقسطرة التداخلية",
+                bio: "زميل الكلية الملكية للجراحين بلندن • رعاية طبية متكاملة بأحدث تقنيات القسطرة العلاجية والتشخيص المبكر لأمراض القلب والشرايين.",
+                stats: [
+                    { val: "+15", lbl: "سنة خبرة طبية" },
+                    { val: "+4,800", lbl: "عملية وقسطرة ناجحة" },
+                    { val: "4.9 ⭐", lbl: "تقييم المرضى" }
+                ],
+                ctaPrimaryText: "احجز موعدك الآن بالعيادة",
+                ctaPrimaryIcon: "fa-calendar-check",
+                ctaSecondaryText: "طلب استشارة طبية أونلاين (فيديو)",
+                ctaSecondaryIcon: "fa-video",
+                linksTitle: "قنوات الحجز والتواصل المباشر",
+                featuresTitle: "التخصصات والخدمات الطبية",
+                locationTitle: "عنوان العيادة الرئيسية",
+                locationAddress: "القاهرة - التجمع الخامس - شارع التسعين الشمالي - ميديكال بارك بريمير - الدور الثالث",
+                hoursTitle: "مواعيد العمل الرسمية بالعيادة",
+                hoursDesc: "السبت إلى الخميس: 4:00 مساءً حتى 10:00 مساءً (الحجز مسبقاً)",
+                modalTitle: "حجز موعد سريع بالعيادة",
+                modalSubtitle: "أدخل بياناتك وسيتم توجيهك فوراً لتأكيد الموعد عبر واتساب العيادة",
+                labelService: "نوع الكشف أو الفحص المطلوب",
+                serviceOptions: [
+                    "كشف طبي شامل + رسم قلب",
+                    "فحص إيكو (موجات صوتية على القلب)",
+                    "استشارة قسطرة تشخيصية / علاجية",
+                    "متابعة ما بعد العمليات",
+                    "استشارة طبية أونلاين (Zoom / WhatsApp)"
+                ],
+                links: [
+                    {
+                        title: "حجز فوري عبر واتساب العيادة",
+                        subtitle: "رد سريع من سكرتارية العيادة لتأكيد الموعد 💬",
+                        icon: "fa-brands fa-whatsapp",
+                        colorRgb: "37, 211, 102",
+                        tag: "الأسرع",
+                        action: "modal"
+                    },
+                    {
+                        title: "احجز عبر منصة فيزيتا (Vezeeta)",
+                        subtitle: "شاهد تقييمات المرضى الموثقة واحجز موعدك ⭐",
+                        icon: "fa-solid fa-stethoscope",
+                        colorRgb: "14, 165, 233",
+                        tag: "4.9/5",
+                        action: "toast:تم فتح صفحة الطبيب على Vezeeta"
+                    },
+                    {
+                        title: "موقع العيادة على خرائط جوجل",
+                        subtitle: "التجمع الخامس - ميديكال بارك (اتجاهات القيادة) 📍",
+                        icon: "fa-solid fa-location-dot",
+                        colorRgb: "16, 185, 129",
+                        tag: "GPS",
+                        action: "toast:جاري فتح الموقع على Google Maps"
+                    },
+                    {
+                        title: "قناة التوعية الطبية على يوتيوب",
+                        subtitle: "نصائح يومية لصحة القلب والوقاية من الجلطات 🎬",
+                        icon: "fa-brands fa-youtube",
+                        colorRgb: "239, 68, 68",
+                        tag: "+120K متابع",
+                        action: "toast:جاري فتح قناة اليوتيوب الطبية"
+                    },
+                    {
+                        title: "الصفحة الطبية على إنستغرام",
+                        subtitle: "معلومات طبية مبسطة والرد على الأسئلة الشائعة 📸",
+                        icon: "fa-brands fa-instagram",
+                        colorRgb: "225, 48, 108",
+                        tag: "Reels",
+                        action: "toast:جاري فتح حساب إنستغرام"
+                    },
+                    {
+                        title: "اتصال هاتفي بطوارئ العيادة",
+                        subtitle: "للخط الساخن والحالات الحرجة على مدار الساعة 📞",
+                        icon: "fa-solid fa-phone-volume",
+                        colorRgb: "59, 130, 246",
+                        tag: "مباشر",
+                        action: "toast:جاري الاتصال برقم العيادة الموحد"
+                    }
+                ],
+                features: [
+                    {
+                        icon: "fa-solid fa-heart-pulse",
+                        title: "القسطرة التداخلية",
+                        desc: "تركيب الدعامات الذكية بدون جراحة"
+                    },
+                    {
+                        icon: "fa-solid fa-laptop-medical",
+                        title: "فحص الإيكو ثلاثي الأبعاد",
+                        desc: "تشخيص دقيق لكفاءة عضلة القلب"
+                    },
+                    {
+                        icon: "fa-solid fa-user-shield",
+                        title: "برامج الوقاية والمتابعة",
+                        desc: "خطط علاجية لمرضى الضغط والسكري"
+                    }
+                ],
+                particleColors: ['14, 165, 233', '16, 185, 129']
+            },
+
+            engineer: {
+                pageTitle: "م. كريم زكي | استشاري الهندسة المعمارية وإدارة المشروعات - النسخة التجريبية",
+                vcardText: "حفظ كارت المكتب",
+                avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80",
+                status: "متاح لاستقبال المشاريع والاستشارات الهندسية",
+                name: "م. كريم زكي",
+                specialty: "استشاري الهندسة المعمارية والتصميم الداخلي",
+                bio: "مؤسس مكتب KZ Architects • خبرة واسعة في تصميم الفيلات الفاخرة، المباني التجارية، والإشراف الهندسي المتكامل بأحدث تقنيات الـ BIM.",
+                stats: [
+                    { val: "+12", lbl: "سنة خبرة هندسية" },
+                    { val: "+140", lbl: "مشروع تم تسليمه" },
+                    { val: "100%", lbl: "التزام بالجداول الزمنية" }
+                ],
+                ctaPrimaryText: "اطلب عرض سعر لمشروعك الآن",
+                ctaPrimaryIcon: "fa-compass-drafting",
+                ctaSecondaryText: "تحميل سابقة الأعمال (Portfolio PDF)",
+                ctaSecondaryIcon: "fa-file-pdf",
+                linksTitle: "معرض الأعمال وقنوات التواصل",
+                featuresTitle: "أبرز الخدمات والمشاريع الهندسية",
+                locationTitle: "المقر الرئيسي للمكتب الهندسي",
+                locationAddress: "الرياض / القاهرة - الحي المالي - برج الأعمال الذكي - الطابق الثامن (مكتب KZ Architects)",
+                hoursTitle: "ساعات العمل واستقبال العملاء",
+                hoursDesc: "الأحد إلى الخميس: 9:00 صباحاً حتى 6:00 مساءً",
+                modalTitle: "طلب معاينة أو تسعير مشروع هندسي",
+                modalSubtitle: "شاركنا تفاصيل مشروعك المبدئية ليتواصل معك المكتب الفني فوراً",
+                labelService: "نوع الخدمة الهندسية المطلوبة",
+                serviceOptions: [
+                    "تصميم معماري وإنشائي متكامل",
+                    "تصميم داخلي وديكور (3D Interior Design)",
+                    "إشراف هندسي وتنفيذ (Turnkey التشطيب المتكامل)",
+                    "تطوير واجهات مباني تجارية وإدارية",
+                    "استشارة هندسية ومعاينة موقع"
+                ],
+                links: [
+                    {
+                        title: "معرض المشاريع على Behance",
+                        subtitle: "شاهد أحدث التصميمات ثلاثية الأبعاد والمشاريع المنفذة 🏛️",
+                        icon: "fa-brands fa-behance",
+                        colorRgb: "59, 130, 246",
+                        tag: "Portfolio",
+                        action: "toast:جاري فتح معرض الأعمال على Behance"
+                    },
+                    {
+                        title: "تواصل مباشر عبر واتساب المكتب",
+                        subtitle: "للاستفسار عن تكلفة المتر وحجز مواعيد المعاينة 💬",
+                        icon: "fa-brands fa-whatsapp",
+                        colorRgb: "37, 211, 102",
+                        tag: "المكتب الفني",
+                        action: "modal"
+                    },
+                    {
+                        title: "الحساب الرسمي على LinkedIn",
+                        subtitle: "الشهادات الدولية، الشراكات، وخبرات إدارة المشروعات 💼",
+                        icon: "fa-brands fa-linkedin-in",
+                        colorRgb: "14, 165, 233",
+                        tag: "موثق",
+                        action: "toast:جاري فتح الملف الرسمي على LinkedIn"
+                    },
+                    {
+                        title: "جولات مصورة من مواقع التنفيذ (Instagram)",
+                        subtitle: "مراحل التشطيب خطوة بخطوة قبل وبعد التنفيذ 📸",
+                        icon: "fa-brands fa-instagram",
+                        colorRgb: "245, 158, 11",
+                        tag: "+85K متابع",
+                        action: "toast:جاري فتح حساب المكتب على إنستغرام"
+                    },
+                    {
+                        title: "موقع المكتب الهندسي على Google Maps",
+                        subtitle: "تفضل بزيارتنا لمناقشة مخططات مشروعك ☕",
+                        icon: "fa-solid fa-map-location-dot",
+                        colorRgb: "16, 185, 129",
+                        tag: "اللوكيشن",
+                        action: "toast:جاري فتح موقع المكتب على الخريطة"
+                    },
+                    {
+                        title: "تحميل الكتالوج وسابقة الأعمال (PDF)",
+                        subtitle: "ملف شامل يضم أكثر من 50 مشروعاً سكنياً وتجارياً 📄",
+                        icon: "fa-solid fa-cloud-arrow-down",
+                        colorRgb: "168, 85, 247",
+                        tag: "18 MB",
+                        action: "toast:جاري بدء تحميل ملف سابقة الأعمال (Company Profile)"
+                    }
+                ],
+                features: [
+                    {
+                        icon: "fa-solid fa-building-columns",
+                        title: "التصميم المعماري",
+                        desc: "مخططات ذكية تستغل كل متر مربع"
+                    },
+                    {
+                        icon: "fa-solid fa-couch",
+                        title: "التصميم الداخلي 3D",
+                        desc: "محاكاة واقعية قبل البدء في التنفيذ"
+                    },
+                    {
+                        icon: "fa-solid fa-hard-hat",
+                        title: "الإشراف والتنفيذ",
+                        desc: "ضمان أعلى جودة خامات وتسليم بالمفتاح"
+                    }
+                ],
+                particleColors: ['245, 158, 11', '59, 130, 246']
+            }
+        };
+
+        let currentPersona = 'doctor';
+
+        /* دالة تبديل الهوية (طبيب / مهندس) */
+        function switchPersona(personaKey) {
+            currentPersona = personaKey;
+            const data = personasData[personaKey];
+            document.documentElement.setAttribute('data-persona', personaKey);
+            document.title = data.pageTitle;
+
+            // تحديث أزرار الشريط العلوي
+            document.getElementById('btnDoctor').classList.toggle('active', personaKey === 'doctor');
+            document.getElementById('btnEngineer').classList.toggle('active', personaKey === 'engineer');
+
+            // تحديث الهيرو
+            document.getElementById('vcardText').textContent = data.vcardText;
+            document.getElementById('profileImage').src = data.avatar;
+            document.getElementById('statusText').textContent = data.status;
+            document.getElementById('profileName').textContent = data.name;
+            document.getElementById('profileSpecialty').textContent = data.specialty;
+            document.getElementById('profileBio').textContent = data.bio;
+
+            // تحديث الإحصائيات
+            document.getElementById('stat1Val').textContent = data.stats[0].val;
+            document.getElementById('stat1Lbl').textContent = data.stats[0].lbl;
+            document.getElementById('stat2Val').textContent = data.stats[1].val;
+            document.getElementById('stat2Lbl').textContent = data.stats[1].lbl;
+            document.getElementById('stat3Val').textContent = data.stats[2].val;
+            document.getElementById('stat3Lbl').textContent = data.stats[2].lbl;
+
+            // تحديث الأزرار
+            document.getElementById('ctaPrimaryText').textContent = data.ctaPrimaryText;
+            document.getElementById('ctaPrimaryIcon').className = `fa-solid ${data.ctaPrimaryIcon}`;
+            document.getElementById('ctaSecondaryText').textContent = data.ctaSecondaryText;
+            document.getElementById('ctaSecondaryIcon').className = `fa-solid ${data.ctaSecondaryIcon}`;
+
+            // تحديث العناوين ومعلومات العيادة/المكتب
+            document.getElementById('linksSectionTitle').textContent = data.linksTitle;
+            document.getElementById('featuresSectionTitle').textContent = data.featuresTitle;
+            document.getElementById('locationTitle').textContent = data.locationTitle;
+            document.getElementById('locationAddress').textContent = data.locationAddress;
+            document.getElementById('hoursTitle').textContent = data.hoursTitle;
+            document.getElementById('hoursDesc').textContent = data.hoursDesc;
+
+            // تحديث النافذة المنبثقة (Modal)
+            document.getElementById('modalTitle').textContent = data.modalTitle;
+            document.getElementById('modalSubtitle').textContent = data.modalSubtitle;
+            document.getElementById('labelService').textContent = data.labelService;
+            const selectEl = document.getElementById('serviceType');
+            selectEl.innerHTML = data.serviceOptions.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+
+            // إعادة بناء الروابط التفاعلية
+            const linksContainer = document.getElementById('dynamicLinksContainer');
+            linksContainer.innerHTML = data.links.map((item) => `
+                <div class="link-card ripple-btn interactive-card" 
+                     style="--platform-color-rgb: ${item.colorRgb};"
+                     onclick="handleCardAction('${item.action}')"
+                     tabindex="0" role="button">
+                    <div class="link-content">
+                        <div class="link-icon"><i class="${item.icon}" aria-hidden="true"></i></div>
+                        <div class="link-text">
+                            <span class="link-title">${item.title}</span>
+                            <span class="link-subtitle">${item.subtitle}</span>
+                        </div>
+                    </div>
+                    <div class="link-badge-end">
+                        <span class="tag-pill">${item.tag}</span>
+                        <i class="fa-solid fa-chevron-left link-arrow" aria-hidden="true"></i>
+                    </div>
+                </div>
+            `).join('');
+
+            // إعادة بناء الخدمات المميزة
+            const featuresContainer = document.getElementById('dynamicFeaturesContainer');
+            featuresContainer.innerHTML = data.features.map((feat) => `
+                <div class="feature-card ripple-btn interactive-card" onclick="openBookingModal()">
+                    <div class="feature-icon"><i class="${feat.icon}" aria-hidden="true"></i></div>
+                    <div class="feature-info-wrap">
+                        <h3 class="feature-title">${feat.title}</h3>
+                        <p class="feature-desc">${feat.desc}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // تفعيل تأثيرات الـ 3D والـ Ripple على البطاقات الجديدة
+            bindInteractiveEffects();
+            updateParticleColors();
+        }
+
+        /* التبديل بين الوضع الليلي والنهاري */
+        function toggleTheme() {
+            const html = document.documentElement;
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+
+            const icon = document.getElementById('themeIcon');
+            icon.className = next === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            showToast(next === 'dark' ? 'تم تفعيل الوضع الليلي الفاخر 🌙' : 'تم تفعيل الوضع النهاري الساطع ☀️');
+        }
+
+        /* التعامل مع نقرات البطاقات */
+        function handleCardAction(actionStr) {
+            if (actionStr === 'modal') {
+                openBookingModal();
+            } else if (actionStr.startsWith('toast:')) {
+                showToast(actionStr.replace('toast:', ''));
+            }
+        }
+
+        /* نافذة الحجز / طلب عرض السعر */
+        function openBookingModal() {
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+        }
+
+        function submitQuickForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('clientName').value;
+            const service = document.getElementById('serviceType').value;
+            const date = document.getElementById('preferredDate').value;
+            const targetTitle = personasData[currentPersona].name;
+
+            closeBookingModal();
+            showToast(`تم تجهيز رسالة الحجز لـ (${targetTitle}) بنجاح! جاري تحويلك لواتساب...`);
+            e.target.reset();
+        }
+
+        /* تحميل جهة الاتصال VCard */
+        function downloadVCard() {
+            const data = personasData[currentPersona];
+            const vcardContent = [
+                "BEGIN:VCARD",
+                "VERSION:3.0",
+                `FN:${data.name}`,
+                `TITLE:${data.specialty}`,
+                "TEL;TYPE=WORK,VOICE:+201000000000",
+                "END:VCARD"
+            ].join("\n");
+
+            const blob = new Blob([vcardContent], { type: "text/vcard;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${data.name}.vcf`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showToast(`تم تحميل كارت الاتصال (${data.name}) بنجاح 📇`);
+        }
+
+        /* إشعار أنيق Toast */
+        let toastTimeout;
+        function showToast(message) {
+            const toast = document.getElementById('toastMsg');
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2800);
+        }
+
+        /* زر المشاركة */
+        document.getElementById('shareBtn').addEventListener('click', async () => {
+            const data = personasData[currentPersona];
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: data.pageTitle,
+                        text: `${data.name} - ${data.specialty}`,
+                        url: window.location.href
+                    });
+                } catch (err) {}
+            } else {
+                const tempInput = document.createElement('input');
+                tempInput.value = window.location.href;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand('copy');
+                document.body.removeChild(tempInput);
+                showToast('تم نسخ رابط الصفحة للمشاركة 🔗');
+            }
+        });
+
+        /* إغلاق المودال عند النقر خارج الصندوق */
+        document.getElementById('bookingModal').addEventListener('click', (e) => {
+            if (e.target.id === 'bookingModal') closeBookingModal();
+        });
+
+        /* أنيميشن الظهور عند التمرير IntersectionObserver */
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal-item').forEach((el, index) => {
+            el.style.transitionDelay = `${Math.min(index * 0.06, 0.3)}s`;
+            revealObserver.observe(el);
+        });
+
+        /* تفعيل تأثيرات الـ 3D Tilt والـ Ripple */
+        function bindInteractiveEffects() {
+            const buttons = document.querySelectorAll('.ripple-btn');
+            buttons.forEach(btn => {
+                if (btn.dataset.rippleBound) return;
+                btn.dataset.rippleBound = "true";
+
+                const createRipple = function (e) {
+                    if (e.type === 'touchstart') { this.dataset.isTouch = 'true'; }
+                    if (e.type === 'mousedown' && this.dataset.isTouch === 'true') { return; }
+
+                    let clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+                    let clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+
+                    spawnTouchSparks(clientX, clientY);
+
+                    const rect = this.getBoundingClientRect();
+                    const ripples = document.createElement('span');
+                    ripples.style.left = (clientX - rect.left) + 'px';
+                    ripples.style.top = (clientY - rect.top) + 'px';
+                    const size = Math.max(rect.width, rect.height);
+                    ripples.style.width = ripples.style.height = size * 0.35 + 'px';
+                    ripples.classList.add('ripple');
+                    this.appendChild(ripples);
+
+                    setTimeout(() => { ripples.remove(); }, 650);
+                };
+
+                btn.addEventListener('mousedown', createRipple);
+                btn.addEventListener('touchstart', createRipple, { passive: true });
+            });
+
+            const interactiveCards = document.querySelectorAll('.interactive-card');
+            interactiveCards.forEach(card => {
+                if (card.dataset.tiltBound) return;
+                card.dataset.tiltBound = "true";
+
+                let ticking = false;
+                const handleMove = (clientX, clientY) => {
+                    if (ticking) return;
+                    ticking = true;
+                    requestAnimationFrame(() => {
+                        const rect = card.getBoundingClientRect();
+                        const x = clientX - rect.left;
+                        const y = clientY - rect.top;
+
+                        card.style.setProperty('--mouse-x', `${x}px`);
+                        card.style.setProperty('--mouse-y', `${y}px`);
+
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+                        const rotateX = ((y - centerY) / centerY) * -6;
+                        const rotateY = ((x - centerX) / centerX) * 6;
+                        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02) translateZ(0)`;
+                        ticking = false;
+                    });
+                };
+
+                card.addEventListener('mousemove', (e) => handleMove(e.clientX, e.clientY));
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateZ(0)';
+                    card.classList.remove('touch-active');
+                });
+                card.addEventListener('touchstart', (e) => {
+                    card.classList.add('touch-active');
+                    handleMove(e.touches[0].clientX, e.touches[0].clientY);
+                }, { passive: true });
+                card.addEventListener('touchend', () => {
+                    setTimeout(() => {
+                        card.style.transform = 'translateZ(0)';
+                        card.classList.remove('touch-active');
+                    }, 250);
+                });
+            });
+        }
+
+        /* ================= خلفية الجزيئات والشرارات التفاعلية ================= */
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particlesArray = [];
+        let burstParticles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.reset();
+                this.y = Math.random() * canvas.height;
+            }
+            reset() {
+                const palette = personasData[currentPersona].particleColors;
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 80;
+                this.size = Math.random() * 2.4 + 0.8;
+                this.speedY = Math.random() * 0.9 + 0.3;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.alpha = Math.random() * 0.55 + 0.15;
+                this.color = Math.random() > 0.4 ? palette[0] : palette[1];
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < -10) this.reset();
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+                ctx.fill();
+            }
+        }
+
+        class SparkBurst {
+            constructor(x, y) {
+                const palette = personasData[currentPersona].particleColors;
+                this.x = x;
+                this.y = y;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 4 + 1.2;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed;
+                this.size = Math.random() * 2.8 + 1.2;
+                this.alpha = 1;
+                this.decay = Math.random() * 0.03 + 0.02;
+                this.color = Math.random() > 0.4 ? palette[0] : palette[1];
+            }
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.alpha -= this.decay;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.color}, ${Math.max(this.alpha, 0)})`;
+                ctx.fill();
+            }
+        }
+
+        function spawnTouchSparks(x, y) {
+            for (let i = 0; i < 8; i++) {
+                burstParticles.push(new SparkBurst(x, y));
+            }
+        }
+
+        function updateParticleColors() {
+            const palette = personasData[currentPersona].particleColors;
+            particlesArray.forEach(p => {
+                p.color = Math.random() > 0.4 ? palette[0] : palette[1];
+            });
+        }
+
+        function initParticles() {
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas, { passive: true });
+            particlesArray = [];
+            const count = window.innerWidth < 600 ? 14 : 35;
+            for (let i = 0; i < count; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArray.forEach(p => { p.update(); p.draw(); });
+            for (let i = burstParticles.length - 1; i >= 0; i--) {
+                burstParticles[i].update();
+                burstParticles[i].draw();
+                if (burstParticles[i].alpha <= 0) burstParticles.splice(i, 1);
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            switchPersona('doctor');
+            initParticles();
+            animateParticles();
+        });
+    </script>
+</body>
+
+</html>
